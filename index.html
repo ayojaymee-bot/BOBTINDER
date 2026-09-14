@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>BOB — BOBinder</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#f4f1ea;color:#111;font-family:Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+header{background:#111;color:#fff;padding:calc(14px + env(safe-area-inset-top)) 18px 14px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;font-size:25px;letter-spacing:1px}
+.status{font-size:11px;border:1px solid #fff;border-radius:20px;padding:5px 9px}
+main{max-width:520px;margin:auto;padding:18px 16px 35px}
+h1{font-size:28px;margin:5px 0 4px}
+.sub{color:#666;margin:0 0 16px}
+.card{background:#fff;border:3px solid #111;border-radius:22px;overflow:hidden;box-shadow:6px 6px 0 #111}
+.photo{height:390px;background:#ddd;display:flex;align-items:center;justify-content:center;position:relative}
+.photo img{width:100%;height:100%;object-fit:contain;background:#eee}
+.badge{position:absolute;left:14px;top:14px;background:#111;color:#fff;padding:7px 11px;border-radius:12px;font-weight:bold;font-size:12px}
+.info{padding:15px}
+.name{font-size:25px;font-weight:900}.age{font-weight:normal}
+.desc{margin:8px 0 0;color:#444;line-height:1.35}
+.buttons{display:flex;gap:12px;padding:15px}
+button{border:3px solid #111;background:#fff;border-radius:16px;height:56px;font-size:25px;font-weight:900;cursor:pointer}
+button:active{transform:translateY(2px)}
+.no{flex:1}.yes{flex:1;background:#111;color:#fff}
+.controls{display:flex;gap:10px;margin-top:18px}
+.controls button{flex:1;font-size:15px;height:48px}
+.notice{display:none;margin-top:15px;background:#111;color:#fff;border-radius:15px;padding:13px;font-weight:bold}
+.matches{margin-top:25px}
+.match{background:#fff;border:2px solid #111;border-radius:14px;padding:12px;margin-top:9px;display:flex;align-items:center;gap:10px}
+.dot{width:10px;height:10px;background:#111;border-radius:50%}
+small{color:#666}
+footer{text-align:center;color:#777;font-size:11px;margin-top:25px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">BOBINDER ♥</div>
+  <div class="status">FAUX SITE</div>
+</header>
+
+<main>
+  <h1>Qui va matcher avec BOB ?</h1>
+  <p class="sub">Une expérience de rencontre 100% fictive.</p>
+
+  <section class="card">
+    <div class="photo">
+      <div class="badge">★ PROFIL DU JOUR</div>
+      <img id="bob" alt="BOB">
+    </div>
+    <div class="info">
+      <div class="name">BOB <span class="age">♡ 22</span></div>
+      <p class="desc">Petit bonhomme mystérieux, fan de musique, de pixels et de longues soirées à ne rien faire. Cherche quelqu'un capable de supporter ses clins d'œil.</p>
+    </div>
+    <div class="buttons">
+      <button class="no" onclick="swipe('no')">✕</button>
+      <button class="yes" onclick="swipe('yes')">♥</button>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button onclick="showInfo()">ⓘ À propos</button>
+    <button onclick="resetCard()">↻ Revoir BOB</button>
+  </div>
+
+  <div id="notice" class="notice"></div>
+
+  <section class="matches">
+    <h2>💌 Derniers matchs</h2>
+    <div class="match"><div class="dot"></div><div><b>Chloé</b><br><small>« Ton style est incroyable 👀 »</small></div></div>
+    <div class="match"><div class="dot"></div><div><b>Emma</b><br><small>« On partage les mêmes goûts musicaux. »</small></div></div>
+    <div class="match"><div class="dot"></div><div><b>Léa</b><br><small>« Salut BOB :) »</small></div></div>
+  </section>
+
+  <footer>BOBINDER — prototype fictif • Aucun vrai compte n'est créé.</footer>
+</main>
+
+<script>
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<rect width="400" height="400" fill="#eee"/>
+<path d="M105 150 Q105 90 200 90 Q295 90 295 150 L295 285 Q295 330 200 330 Q105 330 105 285Z" fill="#fff" stroke="#111" stroke-width="12"/>
+<circle cx="155" cy="195" r="20" fill="#111"/><circle cx="245" cy="195" r="20" fill="#111"/>
+<path d="M145 260 Q200 300 255 260" fill="none" stroke="#111" stroke-width="12" stroke-linecap="round"/>
+</svg>`;
+document.getElementById('bob').src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+
+function swipe(type){
+ const n=document.getElementById('notice');
+ n.style.display='block';
+ if(type==='yes'){
+   n.textContent='💘 MATCH ! BOB a reçu une invitation. (Tout ceci est fictif.)';
+ }else{
+   n.textContent='✕ BOB passe son tour… mais il reviendra peut-être.';
+ }
+}
+function resetCard(){
+ const n=document.getElementById('notice');
+ n.style.display='none';
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function showInfo(){
+ const n=document.getElementById('notice');
+ n.style.display='block';
+ n.textContent='ⓘ BOBINDER est un faux site de rencontre créé comme expérience autour de BOB. Aucun profil réel ni message n’est envoyé.';
+}
+</script>
+</body>
+</html>
